@@ -41,8 +41,7 @@ def generate_account(email: Account, name: str, password: str, talents: list[str
             user_data_dir="browser", 
             channel="chrome", 
             headless=False, 
-            no_viewport=True,
-            args = [f"--disable-extensions-except=PLUGIN PATH HERE", f"--load-extension=PLUGIN PATH HERE"]
+            no_viewport=True
             ) as browser:
 
             browser.clear_cookies() # Clear old cookies
@@ -96,13 +95,13 @@ def generate_account(email: Account, name: str, password: str, talents: list[str
             page.wait_for_url("https://www.bandlab.com/feed/trending") # Wait for sign up to finish
 
             page.goto(verify_email(email))
+            page.wait_for_selector("svg[style='color: var(--ds-color-tint-green-base)']")
 
 def main():
     client = MailTm()
     account = client.get_account() # Create temp email
     userpass = generate_userpass()
     generate_account(account, userpass[0], userpass[1], ["Other"], ["Other"], ["Deez Nuts"])
-    input()
     
 if __name__ == "__main__":
     main()
