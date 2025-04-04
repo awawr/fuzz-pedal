@@ -1,8 +1,15 @@
 import time
+import random
 from pathlib import Path
 from bs4 import BeautifulSoup
 from patchright.sync_api import sync_playwright
 from pymailtm import MailTm
+
+brainrot = ["skibidi", "toilet", "rizz", "brainrot", "gyatt", "ohio", "tax", "gooner", "comp"]
+names = ["zentrr", "arctic", "rodrigo", "gonzalez"]
+triggers = ["pedo", "minor", "racist", "hard r"]
+char = ["o", "j", "0", "x", "1", "l", "9"]
+char2 = ["y", "F", "0", "a", "g", "9", "6"]
 
 def main():
     client = MailTm()
@@ -20,9 +27,9 @@ def main():
             page.set_default_navigation_timeout(0)
             page.set_default_timeout(0)
             page.goto('https://www.bandlab.com/sign-up')
-            page.get_by_placeholder("Enter your name").fill("test") # Name
+            page.get_by_placeholder("Enter your name").fill(random.choice(brainrot) + random.choice(names) + random.choice(triggers)) # Name
             page.get_by_placeholder("you@example.com").fill(account.address) # Email
-            page.get_by_placeholder("Enter at least 6 characters").fill("password123") # Password
+            page.get_by_placeholder("Enter at least 6 characters").fill() # Password
             page.locator("select[ng-model='pickDate.day']").select_option("1") # Day
             page.locator("select[ng-model='pickDate.month']").select_option("1") # Month
             page.locator("select[ng-model='pickDate.year']").select_option("2000") # Year
@@ -34,7 +41,7 @@ def main():
             # page.locator("div[class='quick-upload-cover-cta form-field-upload-picture-img-circle']").click()
             # page.locator("input[type='file']").set_input_files("000c269a70f1e0f246ea44d947027167.jpg")
             # page.get_by_role("button").get_by_text("Upload Picture").click() # Upload profile picture
-            # page.get_by_placeholder("Set a custom username").fill("username123") # Username
+            # page.get_by_placeholder("Set a custom username").fill() # Username
             page.get_by_role("button", name="Continue").click()
             page.wait_for_selector("div[class='complete-profile-goals']")
             page.get_by_role("button", name="Continue").click()
